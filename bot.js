@@ -4442,7 +4442,7 @@ client.on("message", message => {
       });
 	  
 	  	client.on('message', message => {
-         if (message.content === "+") {
+         if (message.content === "+createserver") {
 		       if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_CHANNELS ` **").then(msg => msg.delete(6000))
 
                        if(!message.channel.guild) return message.reply('** This command only for servers **');
