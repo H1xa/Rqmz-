@@ -111,39 +111,7 @@ m.sendMessage(args)
 
 
 
-
-client.on('message', message => {
-  
-    if(message.content.split(' ')[0] == '+sug'){
-        if (message.author.bot) return;
-      
-                            let args = message.content.split(' ').slice(1).join(' ');
-                                 if (!args) return message.reply("You Have To Write A Msg !");
-    
-      let embed = new Discord.RichEmbed()
-                                                    .setAuthor(message.author.username, message.author.avatarURL)
-                                                    .setDescription('**__:mailbox_with_mail: Suggestion Sent !__**')
-                                                    .setThumbnail(message.author.avatarURL)
-                                                    .addField("**-Sent By :**", message.author.username)
-                                                        .addField("**-Sender ID :**", message.author.id)
-                                                    .addField("**-Suggest :**", args)
-                                                    .setColor("FF0000")
-                                                    .setFooter(message.author.username, message.author.avatarURL)
-                                                   
-                                                    
-     client.channels.get("468102376495251466").send({ embed: embed });
-      let embe = new Discord.RichEmbed()
-                                                    .setAuthor(message.author.username, message.author.avatarURL)
-                                                    .setDescription('**__:mailbox_with_mail: Suggestion Sent Successfully !__**')
-                                                    .setThumbnail(message.author.avatarURL)
-                                                                                                    .setColor("FF0000")
-    
-                                                    .setFooter(message.author.username, message.author.avatarURL)
-                                                    message.channel.sendEmbed({ embed: embed });
-               
-                                      
-    }
-    });
+//d8e8h ageb al 6lb mn bote
     
 client.on("message", message => {
   if (message.content === "+help") {
@@ -4505,9 +4473,137 @@ message.guild.createChannel('▓▬▬▬♚▬▬▬▓', 'voice');
   
 }
 });
-	  
-	  
-	  
-            client.login(process.env.BOT_TOKEN);
 
-  
+   
+client.on("message", (message) => {
+   if (message.content.startsWith("+new")) { 
+        const reason = message.content.split(" ").slice(1).join(" ");     
+        if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
+        if (message.guild.channels.exists("name", "ticket-{message.author.id}" + message.author.id)) return message.channel.send(`You already have a ticket open.`);
+        message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
+            let role = message.guild.roles.find("name", "Support Team");
+            let role2 = message.guild.roles.find("name", "@everyone");
+            c.overwritePermissions(role, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });
+            c.overwritePermissions(role2, {
+                SEND_MESSAGES: false,
+                READ_MESSAGES: false
+            });
+            c.overwritePermissions(message.author, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });
+            message.channel.send(`:white_check_mark: **تم إنشاء تذكرتك ، #${c.name}.**`);
+            const embed = new Discord.RichEmbed()
+                .setColor(0xCF40FA)
+                .addField(`مرحباّ ${message.author.username}!`, `يرجى محاولة شرح سبب فتح هذه التذكرة بأكبر قدر ممكن من التفاصيل. سيكون فريق الدعم لدينا قريبا للمساعدة.`)
+                .setTimestamp();
+            c.send({
+                embed: embed
+            });
+        }).catch(console.error); 
+    }
+
+
+  if (message.content.startsWith("#close")) {
+        if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
+
+        message.channel.send(`هل أنت متأكد؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء!\n للتأكيد ، اكتب\`#confirm\`. سيؤدي ذلك إلى مهلة زمنية في غضون 10 ثوانٍ وإلغائها`)
+            .then((m) => {
+                message.channel.awaitMessages(response => response.content === '#confirm', {
+                        max: 1,
+                        time: 10000,
+                        errors: ['time'],
+                    })  
+                    .then((collected) => {
+                        message.channel.delete();
+                    })  
+                    .catch(() => {
+                        m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
+                            m2.delete();
+                        }, 3000);
+                    });
+            });
+    }
+
+});
+
+
+	client.on('message', message => {
+    var command = message.content.split(" ")[0];//grb albot 
+    var args1 = message.content.split(" ").slice(1).join(" ");
+    if(command == prefix + 'find') {
+        let sizePlayers = 1;
+        
+        if(message.author.bot) return;
+        if(!message.channel.guild) return;
+        if(!args1) return message.channel.send(`**➥ Useage:** ${prefix}find (اي حرف من الاسم الي تبيه)`).then(msg => msg.delete(5000));
+        
+        var playersFind = new Discord.RichEmbed()
+        .setTitle(`:white_check_mark: **خاصية البحث عن الاعضاء**`)
+        .setThumbnail(client.user.avatarURL)
+        .setDescription(`**\n➥ البحث عن الاعضاء الموجود بداخل اسمائهم:**\n " ${args1} "\n\n**➥ عدد الاعضاء:**\n " ${message.guild.members.filter(m=>m.user.username.toUpperCase().includes(args1.toUpperCase())).size} "\n\n\`\`\`════════════════════════════════════════════════════════════════════════════════════════\n\n${message.guild.members.filter(m=>m.user.username.toUpperCase().includes(args1.toUpperCase())).map(m=>sizePlayers++ + '. ' + m.user.tag).slice(0,20).join('\n') || 'لا يوجد اعضاء بهذه الاحرف'}\n\n════════════════════════════════════════════════════════════════════════════════════════\`\`\``)
+        .setColor('GRAY')
+        .setTimestamp()
+        .setFooter(message.author.tag, message.author.avatarURL)
+        
+        message.channel.send(playersFind);
+        message.delete();
+    }
+});
+
+
+	client.on('message', async message => {
+  if(message.content.startsWith(prefix + "طلب")) {
+    await message.channel.send("**ماذا تريد:small_orange_diamond:**").then(e => {
+    let filter = m => m.author.id === message.author.id
+    let lan = '';
+    let md = '';
+    let br = '';
+    let chaLan = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
+    .then(collected => {
+      lan = collected.first().content
+      collected.first().delete()
+e.delete();
+     message.channel.send('**كم تدفع :small_blue_diamond:**').then(m => {
+let chaMd = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
+.then(co => {
+  md = co.first().content
+        co.first().delete()
+        m.delete();
+message.channel.send('**من الذي تشتري منه:shopping_cart:**').then(ms => {
+let br = message.channel.awaitMessages(filter, { max: 1, time: 40000, errors: ['time'] })
+.then(col => {
+  br = col.first().content
+        col.first().delete()
+
+ms.delete()
+
+ message.channel.send('** انتظر..**').then(b => {
+        setTimeout(() => {
+  b.edit(`**تم التقديم وسيتم الرد فـ اقرب وقت:white_check_mark:**`)
+        },2000);
+var gg = message.guild.channels.find('name','طلب')
+if(!gg) return;
+if(gg) {
+gg.send({embed : new Discord.RichEmbed()
+.setDescription(`**ماذا تريد:scroll: » \n ${lan}\nكم تدفع :moneybag: » \n ${md} \n من الذي تشتري منه :round_pushpin: » \n ${br}  \n تم التقديم بوسطة :top: » <@${message.author.id}> **`)  
+          .setFooter{`Rqmz,System Team♥`)
+.setTimestamp()
+});
+}        
+})
+})
+})
+})
+})
+})
+})
+ }
+})
+
+
+
+client.login(process.env.BOT_TOKEN
