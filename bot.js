@@ -4593,16 +4593,7 @@ gg.send({embed : new Discord.RichEmbed()
           .setFooter{`Rqmz,System Team♥`)
 .setTimestamp()
 });
-}        
-})
-})
-})
-})
-})
-})
-})
- }
-})
+}     
 
 
 
