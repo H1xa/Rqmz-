@@ -47,8 +47,8 @@ client.on('message', message => {
     .setAuthor("[ Rqmz Bot ]", " https://images-ext-2.discordapp.net/external/ahNXTY5REo9rE5-6oa5XGyzSrJis3qbk7eBUv1sEiYI/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/459725014237970492/558a210e07b9ae2504e427a4c7c6d297.png?width=455&height=455")
     .addField("**[ Rqmz Prefix] :**","**[ + ]**" , true)
     .addField("** [ Rqmz ID ] **", "**"+"459725014237970492"+"**",true)
-    .addField("** [ Rqmz ] **","** **")
-    .addField("**[ Bot Developer ]**","Rqmz [! Rqmz Team]")
+    .addField("** [ Rqmz ] **","** Rqmz Team**")
+    .addField("**[ Bot Developer ]**","Rqmz Team ")
     .addField("**[ Servers ]**" , "**"+`${client.guilds.size}`+" Server**",true)
     .addField("**[ Users ] **",`** ${client.users.size} User**`)
     .setThumbnail(" https://images-ext-2.discordapp.net/external/ahNXTY5REo9rE5-6oa5XGyzSrJis3qbk7eBUv1sEiYI/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/459725014237970492/558a210e07b9ae2504e427a4c7c6d297.png?width=455&height=455")
@@ -111,7 +111,39 @@ m.sendMessage(args)
 
 
 
-//d8e8h ageb al 6lb mn bote
+
+client.on('message', message => {
+  
+    if(message.content.split(' ')[0] == '+sug'){
+        if (message.author.bot) return;
+      
+                            let args = message.content.split(' ').slice(1).join(' ');
+                                 if (!args) return message.reply("You Have To Write A Msg !");
+    
+      let embed = new Discord.RichEmbed()
+                                                    .setAuthor(message.author.username, message.author.avatarURL)
+                                                    .setDescription('**__:mailbox_with_mail: Suggestion Sent !__**')
+                                                    .setThumbnail(message.author.avatarURL)
+                                                    .addField("**-Sent By :**", message.author.username)
+                                                        .addField("**-Sender ID :**", message.author.id)
+                                                    .addField("**-Suggest :**", args)
+                                                    .setColor("FF0000")
+                                                    .setFooter(message.author.username, message.author.avatarURL)
+                                                   
+                                                    
+     client.channels.get("468102376495251466").send({ embed: embed });
+      let embe = new Discord.RichEmbed()
+                                                    .setAuthor(message.author.username, message.author.avatarURL)
+                                                    .setDescription('**__:mailbox_with_mail: Suggestion Sent Successfully !__**')
+                                                    .setThumbnail(message.author.avatarURL)
+                                                                                                    .setColor("FF0000")
+    
+                                                    .setFooter(message.author.username, message.author.avatarURL)
+                                                    message.channel.sendEmbed({ embed: embed });
+               
+                                      
+    }
+    });
     
 client.on("message", message => {
   if (message.content === "+help") {
@@ -4408,153 +4440,6 @@ client.on("message", message => {
         }
       
       });
-	  
-	  	client.on('message', message => {
-         if (message.content === "+createserver") {
-		       if(!message.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return message.reply("**يحتاج البوت الى خاصية` MANAGE_CHANNELS ` **").then(msg => msg.delete(6000))
+            client.login(process.env.BOT_TOKEN);
 
-                       if(!message.channel.guild) return message.reply('** This command only for servers **');
-	                         if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**أنت ليس لديك برمشن** `ADMINISTRATOR`' );
-	const embed = new Discord.RichEmbed()
-		.setDescription('** __:ok_hand: running...to make Channels | يتم الأن عمل الرومات الصويتة والكتابية__ **')
-		.setColor('RANDOM')
-		.setFooter("**Rqmz, System **")
-	message.channel.sendEmbed(embed);
-
-message.guild.createChannel('Info', 'text');
-message.guild.createChannel('Welcome', 'text');
-message.guild.createChannel('Chat', 'text');
-message.guild.createChannel('bot', 'text');
-message.guild.createChannel('bo7', 'text');
-message.guild.createChannel('pic', 'text');
-message.guild.createChannel('cut', 'text');
-message.guild.createChannel('log', 'text');
-message.guild.createChannel('admin-chat', 'text');
-message.guild.createChannel('▓▬▬▬ADMNS▬▬▬▓', 'voice');
-message.guild.createChannel('Owner - مالك السيرفر', 'voice');
-message.guild.createChannel('Co Owner - نائب الرئيس', 'voice');
-message.guild.createChannel('Dev - مبرمج السيرفر', 'voice');
-message.guild.createChannel('Admin - مشرف', 'voice');
-message.guild.createChannel('Mod - مود', 'voice');
-message.guild.createChannel('▓▬▬▬Other▬▬▬▓', 'voice');
-message.guild.createChannel('[ R E C ] 🎥', 'voice');
-message.guild.createChannel('YouTubers - يوتيوبرز', 'voice');
-message.guild.createChannel('VIP + - كبار الشخصيات بلس', 'voice');
-message.guild.createChannel('VIP - كبار الشخصيات', 'voice');
-message.guild.createChannel('Friends - اصدقاء', 'voice');
-message.guild.createChannel('▓▬▬▬WEL▬▬▬▓', 'voice');
-message.guild.createChannel('Help - مساعدة', 'voice');
-message.guild.createChannel('Ξ〖 اقـتـراحـاتـكمـ 💡 〗', 'voice');
-message.guild.createChannel('▓▬▬▬♚▬▬▬▓', 'voice');
-message.guild.createChannel('♧ Ξ〖 🎤  سواليف 📣  〗', 'voice');
-message.guild.createChannel('♢ Ξ〖 🎤 مواهب 🎵  〗', 'voice');
-message.guild.createChannel('❋ Ξ〖 🎈فعاليات 🏅 〗', 'voice');
-message.guild.createChannel('❋ Ξ〖  🕋 القرآن الكريم  〗', 'voice');
-message.guild.createChannel('▓▬▬▬♛▬▬▬▓', 'voice');
-message.guild.createChannel('☆  Ξ〖 🔞  السجن العام 🔪 〗', 'voice');
-message.guild.createChannel('▓▬▬▬Games▬▬▬▓', 'voice');
-message.guild.createChannel('Clash of Clans | كلاش أوف كلانز', 'voice');
-message.guild.createChannel('Clash Royal | كلاش رويال', 'voice');
-message.guild.createChannel('Hajwala  Online | هجولة أون لاين', 'voice');
-message.guild.createChannel('Bullet force | بولت فورس', 'voice');
-message.guild.createChannel('MTA | ام تي اي', 'voice');
-message.guild.createChannel('Ludo Star | لودو ستار', 'voice');
-message.guild.createChannel('▓▬▬▬Private▬▬▬▓', 'voice');
-message.guild.createChannel('✿Tow✿', 'voice');
-message.guild.createChannel('✿Three✿', 'voice');
-message.guild.createChannel('✿Four✿', 'voice');
-message.guild.createChannel('✿Five✿', 'voice');
-message.guild.createChannel('✿Six✿', 'voice');
-message.guild.createChannel('▓▬▬▬AFK▬▬▬▓', 'voice');
-message.guild.createChannel('Away From keyboard AFK', 'voice');
-message.guild.createChannel('▓▬▬▬♚▬▬▬▓', 'voice');
-
-  console.log(`i make text channels in this server: ** ${message.guild.name} ** `)
   
-}
-});
-
-   
-client.on("message", (message) => {
-   if (message.content.startsWith("+new")) { 
-        const reason = message.content.split(" ").slice(1).join(" ");     
-        if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`This server doesn't have a \`Support Team\` role made, so the ticket won't be opened.\nIf you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
-        if (message.guild.channels.exists("name", "ticket-{message.author.id}" + message.author.id)) return message.channel.send(`You already have a ticket open.`);
-        message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
-            let role = message.guild.roles.find("name", "Support Team");
-            let role2 = message.guild.roles.find("name", "@everyone");
-            c.overwritePermissions(role, {
-                SEND_MESSAGES: true,
-                READ_MESSAGES: true
-            });
-            c.overwritePermissions(role2, {
-                SEND_MESSAGES: false,
-                READ_MESSAGES: false
-            });
-            c.overwritePermissions(message.author, {
-                SEND_MESSAGES: true,
-                READ_MESSAGES: true
-            });
-            message.channel.send(`:white_check_mark: **تم إنشاء تذكرتك ، #${c.name}.**`);
-            const embed = new Discord.RichEmbed()
-                .setColor(0xCF40FA)
-                .addField(`مرحباّ ${message.author.username}!`, `يرجى محاولة شرح سبب فتح هذه التذكرة بأكبر قدر ممكن من التفاصيل. سيكون فريق الدعم لدينا قريبا للمساعدة.`)
-                .setTimestamp();
-            c.send({
-                embed: embed
-            });
-        }).catch(console.error); 
-    }
-
-
-  if (message.content.startsWith("#close")) {
-        if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
-
-        message.channel.send(`هل أنت متأكد؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء!\n للتأكيد ، اكتب\`#confirm\`. سيؤدي ذلك إلى مهلة زمنية في غضون 10 ثوانٍ وإلغائها`)
-            .then((m) => {
-                message.channel.awaitMessages(response => response.content === '#confirm', {
-                        max: 1,
-                        time: 10000,
-                        errors: ['time'],
-                    })  
-                    .then((collected) => {
-                        message.channel.delete();
-                    })  
-                    .catch(() => {
-                        m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
-                            m2.delete();
-                        }, 3000);
-                    });
-            });
-    }
-
-});
-
-
-	client.on('message', message => {
-    var command = message.content.split(" ")[0];//grb albot 
-    var args1 = message.content.split(" ").slice(1).join(" ");
-    if(command == prefix + 'find') {
-        let sizePlayers = 1;
-        
-        if(message.author.bot) return;
-        if(!message.channel.guild) return;
-        if(!args1) return message.channel.send(`**➥ Useage:** ${prefix}find (اي حرف من الاسم الي تبيه)`).then(msg => msg.delete(5000));
-        
-        var playersFind = new Discord.RichEmbed()
-        .setTitle(`:white_check_mark: **خاصية البحث عن الاعضاء**`)
-        .setThumbnail(client.user.avatarURL)
-        .setDescription(`**\n➥ البحث عن الاعضاء الموجود بداخل اسمائهم:**\n " ${args1} "\n\n**➥ عدد الاعضاء:**\n " ${message.guild.members.filter(m=>m.user.username.toUpperCase().includes(args1.toUpperCase())).size} "\n\n\`\`\`════════════════════════════════════════════════════════════════════════════════════════\n\n${message.guild.members.filter(m=>m.user.username.toUpperCase().includes(args1.toUpperCase())).map(m=>sizePlayers++ + '. ' + m.user.tag).slice(0,20).join('\n') || 'لا يوجد اعضاء بهذه الاحرف'}\n\n════════════════════════════════════════════════════════════════════════════════════════\`\`\``)
-        .setColor('GRAY')
-        .setTimestamp()
-        .setFooter(message.author.tag, message.author.avatarURL)
-        
-        message.channel.send(playersFind);
-        message.delete();
-    }
-});
-}
-
-
-
-client.login(process.env.BOT_TOKEN}
