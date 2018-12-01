@@ -4449,7 +4449,7 @@ client.on("message", message => {
 	  
 	  
 	  
-	  et sWlc = JSON.parse(fs.readFileSync("./setWlc.json", "UTF8"))   //la t3dl shy
+let sWlc = JSON.parse(fs.readFileSync("./setWlc.json", "UTF8")) 
 client.on('message', message => {
 if(message.channel.type === "dm") return;
 if(message.author.bot) return;
@@ -4569,7 +4569,7 @@ return channel.send(embed)
 	
 	
 	client.on("guildMemberAdd", member => {
-let welcomer = member.guild.channels.find("name","welcome");//hna asm al room
+let welcomer = member.guild.channels.find("name","welcome");
       if(!welcomer) return;
       if(welcomer) {
          moment.locale('ar-ly');
@@ -4600,7 +4600,7 @@ let welcomer = member.guild.channels.find("name","welcome");//hna asm al room
             .setColor('RED')
             .setFooter(`==== Gòǒd Luck ♦=====`, 'https://cdn.pg.sa/GeQGucQhBR.gif')
         
-        var channel =member.guild.channels.find('name', 'welcome')//hna asm al room
+        var channel =member.guild.channels.find('name', 'welcome')
         if (!channel) return;
         channel.send({embed : embed});
         })
