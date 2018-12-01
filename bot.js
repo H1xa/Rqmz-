@@ -4454,10 +4454,10 @@ client.on('message', message => {
 if(message.channel.type === "dm") return;
 if(message.author.bot) return;
   if(!sWlc[message.guild.id]) sWlc[message.guild.id] = {
-    channel: "welcome"//la t3dl shy
+    channel: "welcome"
 }
 const channel = sWlc[message.guild.id].channel
-  if (message.content.startsWith(prefix + "setwelcomer")) {//command
+  if (message.content.startsWith(prefix + "setwelcomer")) {
     if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
     let newChannel = message.content.split(' ').slice(1).join(" ")
     if(!newChannel) return message.reply(`**${prefix}setwelcomer <channel name>**`)
@@ -4489,7 +4489,7 @@ member.guild.fetchInvites().then(guildInvites => {
       var Canvas = require('canvas')
       var jimp = require('jimp')
       
-      const w = ['./w1.png'];
+      const w = ['./img/w1.png'];
       
               let Image = Canvas.Image,
                   canvas = new Canvas(400, 200),
