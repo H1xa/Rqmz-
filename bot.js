@@ -4608,6 +4608,44 @@ let welcomer = member.guild.channels.find("name","welcome");
 	  
 	  
 	  
+	  client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const yumz = member.guild.channels.find("name", "welcome");
+     yumz.send(`<@${member.user.id}> تم دعوته بواسطة <@${inviter.id}>`);
+   //  yumz.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
+  }); 
+});
+
+client.on('message', DEL => {
+if(DEL.content === '+owner') {
+var embed = new Discord.RichEmbed()
+.addField('صاْنع البوت : - ! ʚɞ ᴿQᴹᶻ | Huxa ʚɞ#9999', `${client.user.tag}`, true)
+.setColor("RANDOM")
+DEL.channel.sendEmbed(embed);
+
+}
+});
+
+
+
+
+
+
+ 
+
+
+client.on("guildMemberAdd", member => {
+  member.createDM().then(function (channel) {
+  return channel.send(`👑ولكم نورت السيرفر | Welcome To Server👑 
+اسم العضو المحترم |name member🌷  ${member}
+انت العضو الأسطورة رقم |you member number is👑 ${member.guild.memberCount}`) 
+}).catch(console.error)
+})
+	  
+	  
 	  
 	  
 	  
